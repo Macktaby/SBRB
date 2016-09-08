@@ -23,6 +23,7 @@ public class TransactionDAO {
 
 		transaction.setTransactionID(rs.getInt("transaction_id"));
 		transaction.setProjectOwnerID(rs.getInt("proj_owner_id"));
+		transaction.setProjectOwnerName(rs.getString("proj_owner.name"));
 		transaction.setPackageName(rs.getString("package"));
 		transaction.setAction(rs.getString("action"));
 		transaction.setStartDate(rs.getTimestamp("start_date"));
@@ -32,7 +33,7 @@ public class TransactionDAO {
 
 	public ArrayList<Transaction> getTransactions() {
 		try {
-			String sql = "SELECT * FROM transactions";
+			String sql = "SELECT * FROM transactions, proj_owner WHERE transactions.proj_owner_id = proj_owner.proj_owner_id";
 
 			PreparedStatement stmt;
 			stmt = conn.prepareStatement(sql);
@@ -54,7 +55,8 @@ public class TransactionDAO {
 
 	public ArrayList<Transaction> filterTransactionsByPO(int projOwnerID) {
 		try {
-			String sql = "SELECT * FROM transactions WHERE proj_owner_id = ?";
+			String sql = "SELECT * FROM transactions, proj_owner "
+					+ "WHERE proj_owner_id = ? AND transactions.proj_owner_id = proj_owner.proj_owner_id";
 
 			PreparedStatement stmt;
 			stmt = conn.prepareStatement(sql);

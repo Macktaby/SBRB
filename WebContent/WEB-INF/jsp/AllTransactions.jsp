@@ -16,8 +16,9 @@
 		ArrayList<Transaction> transactions = userServices.getTransactions();
 	%>
 
-	<table>
+	<table border="1">
 		<tr>
+			<th>Project Owner</th>
 			<th>Package</th>
 			<th>Action</th>
 			<th>Start Date</th>
@@ -26,6 +27,7 @@
 			for (Transaction transaction : transactions) {
 		%>
 		<tr>
+			<td><%=transaction.getProjectOwnerName()%></td>
 			<td><%=transaction.getPackageName()%></td>
 			<td><%=transaction.getAction()%></td>
 			<td><%=transaction.getStartDate()%></td>

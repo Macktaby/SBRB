@@ -6,6 +6,7 @@ public class Transaction {
 
 	private int transactionID;
 	private int projectOwnerID;
+	private String projectOwnerName;
 	private String packageName;
 	private String action;
 	private Timestamp startDate;
@@ -13,14 +14,17 @@ public class Transaction {
 	public Transaction() {
 		this.transactionID = 0;
 		this.projectOwnerID = 0;
+		this.projectOwnerName = "";
 		this.packageName = "";
 		this.action = "";
 		this.startDate = new Timestamp(0);
 	}
 
-	public Transaction(int transactionID, int projectOwnerID, String packageName, String action, Timestamp startDate) {
+	public Transaction(int transactionID, int projectOwnerID, String projectOwnerName, String packageName,
+			String action, Timestamp startDate) {
 		this.transactionID = transactionID;
 		this.projectOwnerID = projectOwnerID;
+		this.projectOwnerName = projectOwnerName;
 		this.packageName = packageName;
 		this.action = action;
 		this.startDate = startDate;
@@ -64,5 +68,13 @@ public class Transaction {
 
 	public void setProjectOwnerID(int projectOwnerID) {
 		this.projectOwnerID = projectOwnerID;
+	}
+
+	public String getProjectOwnerName() {
+		return projectOwnerName;
+	}
+
+	public void setProjectOwnerName(String projectOwnerName) {
+		this.projectOwnerName = projectOwnerName;
 	}
 }

@@ -50,7 +50,7 @@ public class UserServices {
 			@FormParam("package") String packageName, @FormParam("action") String action,
 			@FormParam("startTime") Timestamp startDate) {
 
-		Transaction transaction = new Transaction(0, projOwnerID, packageName, action, startDate);
+		Transaction transaction = new Transaction(0, projOwnerID, "", packageName, action, startDate);
 
 		TransactionDAO transactionDAO = new TransactionDAO();
 		transaction = transactionDAO.addTransaction(transaction);
