@@ -66,7 +66,7 @@ public class UserServices {
 	@POST
 	@Path("/getProjectOwners")
 	@Produces(MediaType.TEXT_PLAIN)
-	public static ArrayList<ProjectOwner> getProjectOwners() {
+	public ArrayList<ProjectOwner> getProjectOwners() {
 
 		ProjectOwnerDAO projectOwnerDAO = new ProjectOwnerDAO();
 		ArrayList<ProjectOwner> projOwners = projectOwnerDAO.getProjOwners();

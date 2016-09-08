@@ -10,8 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>All Transactions</title>
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>Project Owners</title>
 <style>
 body {
 	background-color: lightblue;
@@ -24,17 +23,13 @@ body {
 
 	<table border="1">
 		<tr>
-			<th>Project Owner</th>
-			<th>Package</th>
-			<th>Action</th>
-			<th>Start Date</th>
+			<th>Project Owner ID</th>
+			<th>Project Owner Name</th>
 		</tr>
 		<c:forEach items="${it}" var="iter">
 			<tr>
-				<td>${iter.projectOwnerName}</td>
-				<td>${iter.packageName}</td>
-				<td>${iter.action}</td>
-				<td>${iter.startDate}</td>
+				<td>${iter.projectOwnerID}</td>
+				<td>${iter.name}</td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -55,8 +55,8 @@ public class TransactionDAO {
 
 	public ArrayList<Transaction> filterTransactionsByPO(int projOwnerID) {
 		try {
-			String sql = "SELECT * FROM transactions, proj_owner "
-					+ "WHERE proj_owner_id = ? AND transactions.proj_owner_id = proj_owner.proj_owner_id";
+			String sql = "SELECT * FROM transactions, proj_owner WHERE proj_owner.proj_owner_id = ? "
+					+ "AND transactions.proj_owner_id = proj_owner.proj_owner_id";
 
 			PreparedStatement stmt;
 			stmt = conn.prepareStatement(sql);
