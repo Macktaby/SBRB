@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-color: lightblue;
+	font-family: "Lato", sans-serif;
+}
+
+.table {
+	display: table;
+	border: 3px solid green;
+	width: 100%;
+}
+
+.table>* {
+	display: table-row;
+}
+
+.table>*>* {
+	display: table-cell;
+	padding: 15px 0;
+	text-align: center;
+	border: 2px solid;
+}

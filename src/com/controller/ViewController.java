@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.ws.rs.FormParam;
@@ -71,6 +72,26 @@ public class ViewController {
 			ArrayList<Transaction> transactions = us.filterTransactionsByPO(projOwnerID);
 
 			return Response.ok(new Viewable("/WEB-INF/jsp/FilterTransactions", transactions)).build();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@POST
+	@Path("/AddTransaction")
+	@Produces("text/html")
+	public Response AddTransaction(@FormParam("addTransSelect") int projOwnerID,
+			@FormParam("package") String packageName, @FormParam("action") String action,
+			@FormParam("time") Timestamp time) {
+		try {
+			UserServices us = new UserServices();
+			Transaction transaction = us.addTransaction(projOwnerID, packageName, action, time);
+			if (transaction != null)
+				return Response.ok("Transaction added SUCCSEFULLY").build();
+			else
+				return Response.ok("Error in adding Transaction").build();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
