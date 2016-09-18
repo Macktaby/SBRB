@@ -1,7 +1,9 @@
 package com.controller;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -13,7 +15,6 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.mvc.Viewable;
 
-import com.services.UserServices;
 import com.models.ProjectOwner;
 import com.models.Transaction;
 
@@ -39,6 +40,8 @@ public class ViewController {
 	@Produces("text/html")
 	public Response home() {
 		try {
+			UserServices us = new UserServices();
+			us.getProjectOwners();
 			return Response.ok(new Viewable("/WEB-INF/jsp/home")).build();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -84,18 +87,22 @@ public class ViewController {
 	@Produces("text/html")
 	public Response AddTransaction(@FormParam("addTransSelect") int projOwnerID,
 			@FormParam("package") String packageName, @FormParam("action") String action,
-			@FormParam("time") Timestamp time) {
+			@FormParam("time") String time) {
 		try {
 			UserServices us = new UserServices();
-			Transaction transaction = us.addTransaction(projOwnerID, packageName, action, time);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/DD HH:mm");
+			Date parsedDate = dateFormat.parse(time);
+			Timestamp timestamp = new Timestamp(parsedDate.getTime());
+			Transaction transaction = us.addTransaction(projOwnerID, packageName, action, timestamp);
+
 			if (transaction != null)
 				return Response.ok("Transaction added SUCCSEFULLY").build();
 			else
 				return Response.ok("Error in adding Transaction").build();
+
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
-			return null;
+			return Response.ok(e.toString()).build();
 		}
 	}
 
