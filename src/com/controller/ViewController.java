@@ -10,7 +10,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.mvc.Viewable;
@@ -40,7 +39,8 @@ public class ViewController {
 	@Produces("text/html")
 	public Response home() {
 		try {
-			UserServices us = new UserServices();
+			// TODO TO be improved
+			TransactionController us = new TransactionController();
 			us.getProjectOwners();
 			return Response.ok(new Viewable("/WEB-INF/jsp/home")).build();
 		} catch (Exception e) {
@@ -55,12 +55,11 @@ public class ViewController {
 	@Produces("text/html")
 	public Response allTransactions() {
 		try {
-			UserServices us = new UserServices();
+			TransactionController us = new TransactionController();
 			ArrayList<Transaction> transactions = us.getTransactions();
 
 			return Response.ok(new Viewable("/WEB-INF/jsp/AllTransactions", transactions)).build();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return null;
 		}
@@ -71,7 +70,7 @@ public class ViewController {
 	@Produces("text/html")
 	public Response filterTransactions(@FormParam("filterSelect") int projOwnerID) {
 		try {
-			UserServices us = new UserServices();
+			TransactionController us = new TransactionController();
 			ArrayList<Transaction> transactions = us.filterTransactionsByPO(projOwnerID);
 
 			return Response.ok(new Viewable("/WEB-INF/jsp/FilterTransactions", transactions)).build();
@@ -89,7 +88,7 @@ public class ViewController {
 			@FormParam("package") String packageName, @FormParam("action") String action,
 			@FormParam("time") String time) {
 		try {
-			UserServices us = new UserServices();
+			TransactionController us = new TransactionController();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/DD HH:mm");
 			Date parsedDate = dateFormat.parse(time);
 			Timestamp timestamp = new Timestamp(parsedDate.getTime());
@@ -111,7 +110,7 @@ public class ViewController {
 	@Produces("text/html")
 	public Response allProjectOwners() {
 		try {
-			UserServices us = new UserServices();
+			TransactionController us = new TransactionController();
 			ArrayList<ProjectOwner> projectOwners = us.getProjectOwners();
 
 			return Response.ok(new Viewable("/WEB-INF/jsp/GetProjectOwners", projectOwners)).build();
@@ -127,7 +126,7 @@ public class ViewController {
 	@Produces("text/html")
 	public Response addProjectOwner(@FormParam("poName") String projOwnerName) {
 		try {
-			UserServices us = new UserServices();
+			TransactionController us = new TransactionController();
 			ProjectOwner po = us.addProjectOwner(projOwnerName);
 			if (po != null)
 				return Response.ok("Project Owner added SUCCSEFULLY").build();
@@ -142,10 +141,16 @@ public class ViewController {
 	}
 
 	@GET
-	@Path("/signupViewer")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getJson() {
-		return "Hello From ViewController";
+	@Path("/AddReport")
+	@Produces("text/html")
+	public Response addReport() {
+		try {
+			return Response.ok(new Viewable("/WEB-INF/jsp/AddReport")).build();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

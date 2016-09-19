@@ -15,7 +15,7 @@ import com.models.ProjectOwner;
 import com.models.Transaction;
 
 @Path("/")
-public class UserServices {
+public class TransactionController {
 
 	@POST
 	@Path("/getTransactions")

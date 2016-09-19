@@ -1,5 +1,5 @@
 <%@ page import="com.models.ProjectOwner"%>
-<%@ page import="com.services.UserServices"%>
+<%@ page import="com.controller.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -80,7 +80,7 @@ function check() {
 					name="filterSelect" id="filterSelect">
 					<option selected value="0">SELECT</option>
 					<%
-						for (ProjectOwner po : new UserServices().getProjectOwners()) {
+						for (ProjectOwner po : new TransactionController().getProjectOwners()) {
 					%>
 					<option value="<%=po.getProjectOwnerID()%>">
 						<%=po.getName()%>
@@ -109,7 +109,7 @@ function check() {
 					<select name="addTransSelect" id="addTransSelect">
 						<option selected value="0">SELECT</option>
 						<%
-							for (ProjectOwner po : new UserServices().getProjectOwners()) {
+							for (ProjectOwner po : new TransactionController().getProjectOwners()) {
 						%>
 						<option value="<%=po.getProjectOwnerID()%>">
 							<%=po.getName()%>

@@ -1,6 +1,6 @@
 <%@page import="com.models.Transaction"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.services.UserServices"%>
+<%@ page import="com.controller.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
